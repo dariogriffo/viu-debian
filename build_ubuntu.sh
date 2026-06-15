@@ -32,7 +32,7 @@ build_architecture() {
 
     echo "Building for architecture: $build_arch using $viu_release"
 
-    declare -a arr=("jammy" "noble")
+    declare -a arr=("jammy" "noble" "questing" "resolute")
 
     for dist in "${arr[@]}"; do
         FULL_VERSION="$VIU_VERSION-${BUILD_VERSION}+${dist}_${build_arch}_ubu"
