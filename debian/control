@@ -1,0 +1,16 @@
+Source: viu
+Section: utils
+Priority: optional
+Maintainer: Dario Griffo <dariogriffo@gmail.com>
+Build-Depends: debhelper-compat (= 13), wget, ca-certificates
+Standards-Version: 4.6.2
+Homepage: https://github.com/atanunq/viu
+Rules-Requires-Root: no
+
+Package: viu
+Architecture: amd64 arm64
+Depends: ${misc:Depends}
+Description: Command-line image viewer written in Rust
+ viu is a small command-line application that displays images directly in the
+ terminal. It supports various protocols including Kitty, iTerm2, and Sixel,
+ with a fallback to Unicode block characters for unsupported terminals.

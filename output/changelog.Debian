@@ -1,0 +1,14 @@
+viu (FULL_VERSION) DIST; urgency=low
+
+  viu is a small command-line application to view images from the terminal.
+  It supports Kitty, iTerm2, Sixel protocols and Unicode block characters as
+  a fallback for unsupported terminals.
+
+  What's Changed
+  See full changelog at https://github.com/atanunq/viu/releases
+
+
+
+
+
+

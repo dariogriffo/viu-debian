@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+VIU_VERSION := $(shell dpkg-parsechangelog -S Version | sed 's/[-~].*//')
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	@arch="$(DEB_HOST_ARCH)"; \
+	case "$$arch" in \
+		amd64) VIU_RELEASE="viu-x86_64-unknown-linux-musl" ;; \
+		arm64) VIU_RELEASE="viu-aarch64-unknown-linux-musl" ;; \
+		*) echo "Unsupported architecture: $$arch"; exit 1 ;; \
+	esac; \
+	echo "Downloading $$VIU_RELEASE for $(VIU_VERSION)..."; \
+	wget -q "https://github.com/atanunq/viu/releases/download/v$(VIU_VERSION)/$$VIU_RELEASE" -O viu-bin; \
+	chmod +x viu-bin; \
+	echo "$$VIU_RELEASE" > .viu_release_name
+
+override_dh_auto_install:
+	install -D -m 755 viu-bin debian/viu/usr/bin/viu
+
+override_dh_auto_test:
+
+override_dh_auto_clean:
+	@rm -f viu-bin .viu_release_name || true
+
+override_dh_strip:
+
+override_dh_shlibdeps:
