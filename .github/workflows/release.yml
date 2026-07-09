@@ -65,7 +65,7 @@ jobs:
 
 
   release-viu:
-    name: (Draft-)Release viu for Debian
+    name: Release viu for Debian
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs:
@@ -82,15 +82,15 @@ jobs:
         with:
           name: source-artifact
 
-      - name: Publish Release Draft
+      - name: Publish Release
         uses: softprops/action-gh-release@v2
         with:
-          draft: true
+          draft: false
           files: |
             viu_*.deb
             viu_*.dsc
             viu_*.orig.tar.gz
             viu_*.debian.tar.xz
           name: ${{ inputs.VIU_VERSION }}+${{ inputs.build_version }}
-          tag_name: ${{ env.RELEASE_TAG }}
+          tag_name: ${{ inputs.VIU_VERSION }}+${{ inputs.build_version }}
           fail_on_unmatched_files: true
